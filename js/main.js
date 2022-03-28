@@ -31,7 +31,7 @@ class Calculator {
         let calculation
         const prev = parseFloat(this.previousNumber)
         const current = parseFloat(this.currentNumber)
-        
+
         if (this.operation === '+') {
             computation = prev + current
         }
@@ -45,7 +45,7 @@ class Calculator {
             computation = prev / current
         }
         this.currentNumber = computation
-        this.operation = undefined
+        this.operation = ''
         this.previousNumber = 0
     }
 
