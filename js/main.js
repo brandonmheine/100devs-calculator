@@ -7,57 +7,46 @@ class Button {
 class Calculator {
 
     constructor() {
-        this.total = 0
         this.operation = ''
         this.currentNumber = 0
+        this.previousNumber = 0
     }
 
+    appendNumber(number) {
+        if (number === '.' && this.currentNumber.includes('.')) return
+        this.currentNumber = this.currentNumber.toString() + number.toString()
+    }
+
+    chooseOperation(operation) {
+        if (this.currentNumber === '') return
+        if (this.previousNumber !== '') {
+          this.compute()
+        }
+        this.operation = operation
+        this.previousNumber = this.currentNumber
+        this.currentNumber = ''
+    }
 
     calculate() {
+        let calculation
+        const prev = parseFloat(this.previousNumber)
+        const current = parseFloat(this.currentNumber)
+        
         if (this.operation === '+') {
-            this.total += this.currentNumber
-            console.log(this.total)
+            computation = prev + current
         }
         else if (this.operation === '-') {
-            this.total -= Number(resultPlace.textContent)
+            computation = prev - current
         }
         else if (this.operation === 'X') {
-            this.total *= Number(resultPlace.textContent)
+            computation = prev * current
         }
         else if (this.operation === '/') {
-            this.total /= Number(resultPlace.textContent)
+            computation = prev / current
         }
-        else {
-            this.total = 0
-        }
-    }
-
-    add(num1) {
-        this.currentNumber = Number(resultPlace.textContent)
-        this.operation = '+'
-        this.calculate()
-        resultPlace.textContent = this.total
-    }
-
-    subtract(num1) {
-        this.currentNumber = Number(resultPlace.textContent)
-        this.operation = '-'
-        this.calculate()
-        resultPlace.textContent = this.total
-    }
-
-    multiply(num1) {
-        this.currentNumber = Number(resultPlace.textContent)
-        this.operation = 'X'
-        this.calculate()
-        resultPlace.textContent = this.total
-    }
-
-    divide(num1) {
-        this.currentNumber = Number(resultPlace.textContent)
-        this.operation = '/'
-        this.calculate()
-        resultPlace.textContent = this.total
+        this.currentNumber = computation
+        this.operation = undefined
+        this.previousNumber = 0
     }
 
     equals() {
